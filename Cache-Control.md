@@ -24,3 +24,18 @@
     - no-transform
         + 主要用在代理服务器中，不允许代理服务器修改返回的内容如压缩、打包
 * 注：现在这些在请求头中设置的语义，是一个限制但不是强制的，所以代理服务器可以不遵循
+# 验证头
++ Last-Modified
+    - 上次修改时间，配合If-Modified-Since或者If-Unmodified-Since使用
+    - 对比上次修改时间以验证资源是否需要更新
++ Etag 
+    - 数据签名（对自己内容形成的一个唯一标识，只要修改标识就会改变）
+    - 配合If-Match或者If-None-Match使用
+    - 对比资源的签名判断是否使用缓存
+# Cookie
+    + 通过Set-Cookie设置
+    + 下次请求会自动带上
+    + 键值对，可以设置多个
+    + max-age和expires设置过期时间
+    + Secure只在HTTPS的时候发送 
+    + HttpOnly无法通过document.cookie访问（安全性）

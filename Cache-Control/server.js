@@ -11,10 +11,30 @@ http.createServer(function (request,response){
         response.end(html)
     }
     if(request.url === '/script.js'){
-        response.writeHead(200,{
-            'Content-Type':'text/javascript',
-            'Cache-Control':'max-age=20'
-        })
-        response.end('console.log("script loaded")')
+        // response.writeHead(200,{
+        //     'Content-Type':'text/javascript',
+        //     'Cache-Control':'max-age=200000000,no-cache',
+        //     'Last-Modified':'123',
+        //     'Etag':'777'
+        // })
+        const etag = request.headers['if-none-match']//request.headers是个对象不能用（）
+        if(etag === '777'){
+            response.writeHead(304,{
+                'Content-Type':'text/javascript',
+                'Cache-Control':'max-age=200000000,no-cache',
+                'Last-Modified':'123',
+                'Etag':'777'
+            })
+            response.end('')
+        }else{
+            response.writeHead(200,{
+                'Content-Type':'text/javascript',
+                'Cache-Control':'max-age=200000000,no-cache',
+                'Last-Modified':'123',
+                'Etag':'777'
+            })
+            response.end('console.log("script loaded")')
+        }
+        
     }
 }).listen(8886)
