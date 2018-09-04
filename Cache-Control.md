@@ -37,5 +37,7 @@
     + 下次请求会自动带上
     + 键值对，可以设置多个
     + max-age和expires设置过期时间
+        - max-age:过期时间需要多久
+        - expires:需要多久过期
     + Secure只在HTTPS的时候发送 
     + HttpOnly无法通过document.cookie访问（安全性）
